@@ -18,47 +18,44 @@
 #' 
 #' vertsummary(vertsearch("Oncorhynchus clarki henshawi"))
 #' }
-data <- read.csv("~/Desktop/searchres.csv")
+input <- read.csv("~/Desktop/FIshNet2_Modifications/searchres.csv")
+
 fishsummary <- function(input, verbose = TRUE) {
-  if (!class(input) %in% c("list", "data.frame")) {
-    stop("Input must be of class list or data.frame", call. = FALSE)
-  }
-  if (inherits(input, "list"))  input <- input$data
-  
   # recs <- number of records in the data frame
   recs <- nrow(input)
   
   # coords <- number of records with viable lat and long data
   # errest <- number of "coords" records with viable coordinate uncertainty estimate
-  if (is.null(sw(input$decimallatitude)) & is.null(sw(input$decimallongitude))) {
+  if (is.null(input$Latitude) & is.null(input$Longitude)) {
     coords <- 0
   } else{ 
     coords <- NULL
   }
-  if (inherits(sw(input$coordinateuncertaintyinmeters), "NULL")) {
+  
+  if (is.null(input$CoordinateUncertaintyInMeters)) {
     errest <- 0
   } else {
     errest <- NULL
   }
   if (is.null(coords)) {
-    coords <- sum(stats::complete.cases(input[, c('decimallatitude','decimallongitude')]))
+    coords <- sum(stats::complete.cases(input[, c('Latitude','Longitude')]))
     # checking for good lat/long data (if not, use only the above line)
-    input$decimallatitude <- as.numeric(as.character(input$decimallatitude))
-    input$decimallongitude <- as.numeric(as.character(input$decimallongitude))
+    input$Latitude <- as.numeric(as.character(input$Latitude))
+    input$Longitude <- as.numeric(as.character(input$Longitude))
     if (is.null(errest)) {
-      input$coordinateuncertaintyinmeters <- as.numeric(as.character(input$coordinateuncertaintyinmeters))
+      input$CoordinateUncertaintyInMeters <- as.numeric(as.character(input$CoordinateUncertaintyInMeters))
     }
-    mappable <- input[stats::complete.cases(input[,c('decimallatitude','decimallongitude')]),]
-    mappable <- subset(mappable, input$decimallatitude < 90 & input$decimallatitude > -90)
-    mappable <- subset(mappable, input$decimallongitude < 180 & input$decimallongitude > -180)
+    mappable <- input[stats::complete.cases(input[,c('Latitude','Longitude')]),]
+    #mappable <- subset(mappable, input$decimallatitude < 90 & input$decimallatitude > -90)
+    #mappable <- subset(mappable, input$decimallongitude < 180 & input$decimallongitude > -180)
     if (nrow(mappable) < coords) {
       bad <- coords - nrow(mappable)
       mssg(verbose, paste(bad, " record(s) with bad coordinates"))
       coords <- coords - bad
     }
     if (is.null(errest)) {
-      mappable <- subset(mappable, input$coordinateuncertaintyinmeters > 0 &
-                           input$coordinateuncertaintyinmeters < 20020000)
+      mappable <- subset(mappable, input$CoordinateUncertaintyInMeters > 0 &
+                           input$CoordinateUncertaintyInMeters < 20020000)
       if ((errest <- nrow(mappable)) < coords) {
         bad <- coords - errest
       }
@@ -69,43 +66,56 @@ fishsummary <- function(input, verbose = TRUE) {
   removeDups <- function(x) {
     paste(unique(unlist(strsplit(x, split = " "))), collapse = " ")
   }
-  if (inherits(input$institutioncode, "NULL") & inherits(input$collectioncode, "NULL")) {
+  if (inherits(input$InstitutionCode, "NULL") & inherits(input$CollectionCode, "NULL")) {
     instcoll <- NA
   } else {
-    instcoll <- as.matrix(paste(input$institutioncode, 
-                                input$collectioncode, sep = " "))
+    instcoll <- as.matrix(paste(input$InstitutionCode, 
+                                input$CollectionCode, sep = "/"))
     instcoll <- table(apply(instcoll, 1, removeDups))
   }
   
   # country <- number of records from each country
-  if (inherits(sw(input$country), "NULL")) {
+  
+  if (is.null(input$Country)) {
     country <- NA 
   }  else {
-    country <- table(input$country)
+    country <- c()
+    # replace United States with USA for consistency
+    for (c in 1:length(input$Country)) {
+      if(input$Country[c] == "United States"){
+        country <- c(country, "USA")
+      } else{
+        country <- c(country, as.character(input$Country[c]))
+      }
+    }
+    country <- table(country)
   }
   
   # year <- number of records by year
-  if (inherits(sw(input$year), "NULL")) {
+  if (is.null(input$YearCollected)){
     year <- NA
   } else {
-    year <- table(input$year)
+    year <- table(input$YearCollected)
   }
   
-  # taxon <- number of records by taxonomic name
-  taxon <- as.matrix(paste(input$genus, input$specificepithet, sep = " "))
-  if (!inherits(sw(input$infraspecificepithet), "NULL")) {
-    taxon <- as.matrix(paste(taxon, input$infraspecificepithet, sep = " "))
+  # family <- number of records by family name
+  if (is.null(input$Family)){
+    family <- NA
+  } else {
+    #input$Family[input$Family==""] <- NA
+    family <- table(input$Family)
   }
-  taxon <- gsub(" NA", "", taxon) # remove unknowns - usually infrasp.ep
-  taxon <- table(apply(taxon, 1, removeDups))
+  
+  #if (!inherits(sw(input$infraspecificepithet), "NULL")) {
+   # taxon <- as.matrix(paste(taxon, input$infraspecificepithet, sep = " "))
+  #}
+  #taxon <- gsub(" NA", "", taxon) # remove unknowns - usually infrasp.ep
+  #taxon <- table(apply(taxon, 1, removeDups))
   
   # return summary
-  structure(list("recs" = recs, "coords" = coords, "errest" = errest, 
-                 "instcoll" = instcoll, "country" = country, "year" = year, 
-                 "taxon" = taxon), class = "vertsummary")
-}
+  res = structure(list("recs" = recs, "coords" = coords, "errest" = errest, 
+                 "instcoll" = instcoll, "country" = country, "year" = year, "family" = family))
 
-#' @export
 print.fishsummary <- function(x, ...){
   cat(paste0("Number of records ($recs): ", x$recs), sep = "\n") 
   cat(paste("Records with decimal lat/long (-90<lat<90, -180<long<180) ($coords): ", x$coords, sep = ""), sep = "\n")
@@ -116,8 +126,12 @@ print.fishsummary <- function(x, ...){
   print(x$country)
   cat("\nRecord count by year ($year): ", sep = "\n")
   print(x$year)
-  cat("\nRecord count by taxon ($taxon): ", sep = "\n")
-  print(x$taxon) 
-}  
+  cat("\nRecord count by familiy ($family): ", sep = "\n")
+  print(x$family)
 }
 
+print.fishsummary(res)
+return(res)
+}
+
+x <- fishsummary(input)
