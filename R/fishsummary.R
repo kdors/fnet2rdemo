@@ -3,22 +3,15 @@
 #' Creates a simple summary of data returned by a FishNet2 search.
 #'
 #' @export
-#' @param input Output from \code{\link{vertsearch}}, 
-#'    \code{\link{searchbyterm}}, or \code{\link{spatialsearch}}. Required.
+#' @param input A dataframe in FishNet2 standard format (by using read.csv())
 #' @param verbose Print progress and information messages. Default: TRUE
 #' @return A list of summary statistics
-#' @details \code{\link{vertsummary}} provides information on the sources, 
-#' types and extent of data returned by a VertNet search.
-#' @examples \dontrun{
-#' # get occurrence records
-#' recs <- vertsearch("Junco hyemalis", limit = 10)
 #' 
 #' # summarize occurrence records
-#' vertsummary(recs)
-#' 
-#' vertsummary(vertsearch("Oncorhynchus clarki henshawi"))
+
 #' }
-input <- read.csv("~/Desktop/FIshNet2_Modifications/searchres.csv")
+
+#input <- read.csv("~/Desktop/FIshNet2_Modifications/searchres.csv")
 
 fishsummary <- function(input, verbose = TRUE) {
   # recs <- number of records in the data frame
@@ -102,36 +95,69 @@ fishsummary <- function(input, verbose = TRUE) {
   if (is.null(input$Family)){
     family <- NA
   } else {
-    #input$Family[input$Family==""] <- NA
     family <- table(input$Family)
   }
   
-  #if (!inherits(sw(input$infraspecificepithet), "NULL")) {
-   # taxon <- as.matrix(paste(taxon, input$infraspecificepithet, sep = " "))
-  #}
-  #taxon <- gsub(" NA", "", taxon) # remove unknowns - usually infrasp.ep
-  #taxon <- table(apply(taxon, 1, removeDups))
+  # scientific name <- number of records by scientific name
+  if (is.null(input$ScientificName)){
+    scientific_name <- NA
+  } else {
+    scientific_name <- table(input$ScientificName)
+  }
+  
+  #tissues <- number of records with tissues
+  if (is.null(input$Tissues)){
+    tissues <- "None"
+  } else {
+    tissues <- table(input$Tissues)
+  }
+  
+  # preparation_type
+  preparation_type <- c()
+  for (i in input$PreparationType) {
+    if(is.na(i)==TRUE){
+      preparation_type <- c(as.factor("None"), preparation_type)
+    } else{
+      preparation_type <- c(as.factor(i), preparation_type)
+    }
+    
+  }
+  
+  #input$PreparationType <- as.factor(gsub(NA, "none", input$PreparationType))
+  if (is.null(input$PreparationType)){
+    preparation_type <- "None"
+  } else {
+    preparation_type <- (input$PreparationType)
+  }
   
   # return summary
   res = structure(list("recs" = recs, "coords" = coords, "errest" = errest, 
-                 "instcoll" = instcoll, "country" = country, "year" = year, "family" = family))
+                 "instcoll" = instcoll, "country" = country, "year" = year, 
+                 "family" = family, "scientific_name" = scientific_name, "preparation_type" = preparation_type, "tissues" = tissues))
 
-print.fishsummary <- function(x, ...){
-  cat(paste0("Number of records ($recs): ", x$recs), sep = "\n") 
-  cat(paste("Records with decimal lat/long (-90<lat<90, -180<long<180) ($coords): ", x$coords, sep = ""), sep = "\n")
-  cat(paste("Records with lat/long and coordinate uncertainty estimate (0<errest<20020000) ($errest): ", x$errest), sep = "\n")
-  cat("Record count by institution/collection ($instcoll): ", sep = "\n")
-  print(x$instcoll)
-  cat("\nRecord count by country ($country): ", sep = "\n")
-  print(x$country)
-  cat("\nRecord count by year ($year): ", sep = "\n")
-  print(x$year)
-  cat("\nRecord count by familiy ($family): ", sep = "\n")
-  print(x$family)
-}
-
-print.fishsummary(res)
-return(res)
+  print.fishsummary <- function(x, ...){
+    cat(paste0("Number of records ($recs): ", x$recs), sep = "\n") 
+    cat(paste("Records with decimal lat/long (-90<lat<90, -180<long<180) ($coords): ", x$coords, sep = ""), sep = "\n")
+    cat(paste("Records with lat/long and coordinate uncertainty estimate (0<errest<20020000) ($errest): ", x$errest), sep = "\n")
+    cat("Record count by institution/collection ($instcoll): ", sep = "\n")
+    print(x$instcoll)
+    cat("\nRecord count by country ($country): ", sep = "\n")
+    print(x$country)
+    cat("\nRecord count by year ($year): ", sep = "\n")
+    print(x$year)
+    cat("\nRecord count by familiy ($family): ", sep = "\n")
+    print(x$family)
+    cat("\nRecord count by Scientific Name ($scientific_name): ", sep = "\n")
+    print(x$scientific_name)
+    cat("\nRecord count by preparation type ($preparation_type): ", sep = "\n")
+    print(x$preparation_type)
+    cat("\nRecords with tissues ($tissues: ", sep = "\n")
+    print(x$tissues)
+  }
+  if(verbose == TRUE ){
+    print.fishsummary(res) 
+  }
+  return(res)
 }
 
 x <- fishsummary(input)
