@@ -1,4 +1,4 @@
-#' Summarize a set of records downloaded from FishNet2
+#' Filter a set of records downloaded from FishNet2 by Tissue column
 #'
 #' Filters data returned by a FishNet2 search for records that include tissue information.
 #'
