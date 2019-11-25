@@ -6,7 +6,7 @@
 #' @param input A dataframe in FishNet2 standard format (by using read.csv())
 #' @param verbose Print progress and information messages. Default: TRUE
 #' @return A list of summary statistics
-#' 
+#'
 #' # summarize occurrence records
 
 #' }
@@ -16,15 +16,15 @@
 fishsummary <- function(input, verbose = TRUE) {
   # recs <- number of records in the data frame
   recs <- nrow(input)
-  
+
   # coords <- number of records with viable lat and long data
   # errest <- number of "coords" records with viable coordinate uncertainty estimate
   if (is.null(input$Latitude) & is.null(input$Longitude)) {
     coords <- 0
-  } else{ 
+  } else{
     coords <- NULL
   }
-  
+
   if (is.null(input$CoordinateUncertaintyInMeters)) {
     errest <- 0
   } else {
@@ -54,7 +54,7 @@ fishsummary <- function(input, verbose = TRUE) {
       }
     }
   }
-  
+
   # instcoll <- number of records from each institution+collection
   removeDups <- function(x) {
     paste(unique(unlist(strsplit(x, split = " "))), collapse = " ")
@@ -62,15 +62,15 @@ fishsummary <- function(input, verbose = TRUE) {
   if (inherits(input$InstitutionCode, "NULL") & inherits(input$CollectionCode, "NULL")) {
     instcoll <- NA
   } else {
-    instcoll <- as.matrix(paste(input$InstitutionCode, 
+    instcoll <- as.matrix(paste(input$InstitutionCode,
                                 input$CollectionCode, sep = "/"))
     instcoll <- table(apply(instcoll, 1, removeDups))
   }
-  
+
   # country <- number of records from each country
-  
+
   if (is.null(input$Country)) {
-    country <- NA 
+    country <- NA
   }  else {
     country <- c()
     # replace United States with USA for consistency
@@ -83,35 +83,35 @@ fishsummary <- function(input, verbose = TRUE) {
     }
     country <- table(country)
   }
-  
+
   # year <- number of records by year
   if (is.null(input$YearCollected)){
     year <- NA
   } else {
     year <- table(input$YearCollected)
   }
-  
+
   # family <- number of records by family name
   if (is.null(input$Family)){
     family <- NA
   } else {
     family <- table(input$Family)
   }
-  
+
   # scientific name <- number of records by scientific name
   if (is.null(input$ScientificName)){
     scientific_name <- NA
   } else {
     scientific_name <- table(input$ScientificName)
   }
-  
+
   #tissues <- number of records with tissues
   if (is.null(input$Tissues)){
     tissues <- "None"
   } else {
     tissues <- table(input$Tissues)
   }
-  
+
   # preparation_type
   preparation_type <- c()
   for (i in input$PreparationType) {
@@ -120,23 +120,23 @@ fishsummary <- function(input, verbose = TRUE) {
     } else{
       preparation_type <- c(as.factor(i), preparation_type)
     }
-    
+
   }
-  
+
   #input$PreparationType <- as.factor(gsub(NA, "none", input$PreparationType))
   if (is.null(input$PreparationType)){
     preparation_type <- "None"
   } else {
     preparation_type <- (input$PreparationType)
   }
-  
+
   # return summary
-  res = structure(list("recs" = recs, "coords" = coords, "errest" = errest, 
-                 "instcoll" = instcoll, "country" = country, "year" = year, 
+  res = structure(list("recs" = recs, "coords" = coords, "errest" = errest,
+                 "instcoll" = instcoll, "country" = country, "year" = year,
                  "family" = family, "scientific_name" = scientific_name, "preparation_type" = preparation_type, "tissues" = tissues))
 
   print.fishsummary <- function(x, ...){
-    cat(paste0("Number of records ($recs): ", x$recs), sep = "\n") 
+    cat(paste0("Number of records ($recs): ", x$recs), sep = "\n")
     cat(paste("Records with decimal lat/long (-90<lat<90, -180<long<180) ($coords): ", x$coords, sep = ""), sep = "\n")
     cat(paste("Records with lat/long and coordinate uncertainty estimate (0<errest<20020000) ($errest): ", x$errest), sep = "\n")
     cat("Record count by institution/collection ($instcoll): ", sep = "\n")
@@ -155,9 +155,8 @@ fishsummary <- function(input, verbose = TRUE) {
     print(x$tissues)
   }
   if(verbose == TRUE ){
-    print.fishsummary(res) 
+    print.fishsummary(res)
   }
   return(res)
 }
 
-x <- fishsummary(input)
