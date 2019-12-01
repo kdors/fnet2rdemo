@@ -1,13 +1,16 @@
 Package: rfishnet2
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Exploratory Data Analysis for FishNet2 Data
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Margaux Armfield <yourself@somewhere.net> 
-    Kennedy Dorsey <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: as.person(c(
+  "Margaux Armfield <yourself@somewhere.net> [aut]",
+  "Kennedy Dorsey <kadorsey97@gmail.com> [aut, cre]"))
+Maintainer:  Kennedy Dorsey <kadorsey97@gmail.com>
+Description: Provides data processing and summarization of data from FishNet2.net
+  in text and graphical outputs. Allows efficient filtering of information and
+  data cleaning.
+License: MIT + file LICENSE
+URL: https://github.com/kdors/rfishnet2
 Encoding: UTF-8
 LazyData: true
 Imports: 
