@@ -7,6 +7,7 @@
 #' FishNet2. For this to work properly, the dataframe must have column names
 #' using names given in standard csv format from FishNet2 website.
 #'
+#' @export
 #' @param df A dataframe in FishNet2 standard format (by using read.csv())
 #' @param lat Latitude coordinate
 #' @param lon Longitude coordinate

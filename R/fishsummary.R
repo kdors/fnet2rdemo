@@ -9,7 +9,7 @@
 #'
 #' # summarize occurrence records
 
-#' }
+#'
 
 #input <- read.csv("~/Desktop/FIshNet2_Modifications/searchres.csv")
 

@@ -11,6 +11,11 @@ fishsummary(input, verbose = TRUE)
 
 \item{verbose}{Print progress and information messages. Default: TRUE}
 }
+\value{
+A list of summary statistics
+
+# summarize occurrence records
+}
 \description{
 Creates a simple summary of data returned by a FishNet2 search.
 }

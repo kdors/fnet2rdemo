@@ -7,6 +7,7 @@
 #' found using the 'ScientificName' column in a FishNet2 dataframe. If "value is
 #' only one word, no species name is returned.
 #'
+#' @export
 #' @param df A dataframe in FishNet2 standard format (by using read.csv())
 #' @param genus Genus of species
 #' @return Vector of unique species values or character(0) if empty
