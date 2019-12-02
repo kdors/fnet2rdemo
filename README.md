@@ -11,3 +11,9 @@ rfishnet2 is a package for users of fishnet2.net to summarize and explore data f
 * Search/filter dataframe
 * Get species information
 
+## Installation
+
+### Install the development version from GitHub
+```
+devtools::install_github("kdors/rfishnet2")
+```
