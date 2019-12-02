@@ -8,6 +8,7 @@
 #' NA values are removed in the function.
 #'
 #' @export
+#' @importFrom grDevices colours
 #' @param df A dataframe in FishNet2 standard format (by using read.csv())
 #' @param color Color of plotted points, default is dark red
 #' @return Plot of latitude and longitude points on world map
@@ -30,9 +31,9 @@ occ_map <- function(df, color = "darkred") {
   max_long <- max(df["Longitude"], na.rm = TRUE)
   min_long <- min(df["Longitude"], na.rm = TRUE)
 
-  return(ggplot(data = world_map) +
+  return(ggplot2::ggplot(data = world_map) +
     ggplot2::geom_sf() +
-    ggplot2::geom_point(data = df, aes(x = Longitude, y = Latitude), size = 2,
+    ggplot2::geom_point(data = df, ggplot2::aes(x = Longitude, y = Latitude), size = 2,
                shape = 23, fill = color) +
     ggplot2::coord_sf(xlim = c(min_long - 10, max_long + 10),
              ylim = c(min_lat - 10, max_lat + 10),

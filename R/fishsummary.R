@@ -43,7 +43,7 @@ fishsummary <- function(input, verbose = TRUE) {
     #mappable <- subset(mappable, input$decimallongitude < 180 & input$decimallongitude > -180)
     if (nrow(mappable) < coords) {
       bad <- coords - nrow(mappable)
-      mssg(verbose, paste(bad, " record(s) with bad coordinates"))
+      # mssg(verbose, paste(bad, " record(s) with bad coordinates"))
       coords <- coords - bad
     }
     if (is.null(errest)) {

@@ -16,7 +16,7 @@
 #'   radius r
 #'
 #' @examples
-#'
+#' spatial_search(ictaluridae, 36.12, -77.63, 1)
 #'
 spatial_search <- function(df, lat, lon, r){
 

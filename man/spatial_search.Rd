@@ -29,6 +29,6 @@ FishNet2. For this to work properly, the dataframe must have column names
 using names given in standard csv format from FishNet2 website.
 }
 \examples{
-
+spatial_search(ictaluridae, 36.12, -77.63, 1)
 
 }

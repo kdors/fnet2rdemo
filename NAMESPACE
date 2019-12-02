@@ -3,4 +3,6 @@
 export(fishsummary)
 export(get_species)
 export(hasTissues)
+export(occ_map)
 export(spatial_search)
+importFrom(grDevices,colours)

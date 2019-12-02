@@ -12,8 +12,7 @@
 #' @param genus Genus of species
 #' @return Vector of unique species values or character(0) if empty
 #'
-#' @examples
-#'
+
 get_species <- function(df, genus) {
 
   if(!is.data.frame(df)) {
