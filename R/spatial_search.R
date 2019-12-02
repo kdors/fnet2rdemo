@@ -20,23 +20,46 @@
 #'
 spatial_search <- function(df, lat, lon, r){
 
-  coord = c(lat,lon)
-  data_coord = vector("integer", 2)
-
-  d<- subset(df, is.na(Latitude) == FALSE & is.na(Longitude) == FALSE)
-  len = nrow(d)
-  distance = vector("integer", len)
-
-  # use haversine formula
-  for (row in 1:len) {
-
-    data_coord[1] <- d[row, "Latitude"]
-    data_coord[2] <- d[row, "Longitude"]
-    distance[row] <- pracma::haversine(coord,data_coord)
+  if(!is.data.frame(df)) {
+    stop("Error: Function input is not a dataframe")
   }
 
-  d$distance <- distance
-  output <- subset(d, distance <= r)
+  if(r < 0 ){
+    stop("Error: radius must be nonnegative.")
+  }
 
-  return(output)
+  if((lat > 90) | (lat < -90)){
+    stop("Error: Incorrect latitude input.")
+  }
+
+  if((lon > 180) | ( lon  < -180)) {
+    stop("Error: Incorrect longitude input.")
+  }
+
+  if(("Latitude" %in% names(df)) && ("Longitude" %in% names(df))){
+
+    coord = c(lat,lon)
+    data_coord = vector("integer", 2)
+
+    d<- subset(df, is.na(Latitude) == FALSE & is.na(Longitude) == FALSE)
+    len = nrow(d)
+    distance = vector("integer", len)
+
+    # use haversine formula
+    for (row in 1:len) {
+
+      data_coord[1] <- d[row, "Latitude"]
+      data_coord[2] <- d[row, "Longitude"]
+      distance[row] <- pracma::haversine(coord,data_coord)
+    }
+
+    d$distance <- distance
+    output <- subset(d, distance <= r)
+
+    return(output)
+  }
+  else{
+
+    stop("Error: Missing columns 'Latitude' and/or 'Longitude'")
+  }
 }

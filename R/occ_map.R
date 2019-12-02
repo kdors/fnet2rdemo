@@ -25,6 +25,8 @@ occ_map <- function(df, color = "darkred") {
     stop("Error: Color not found")
   }
 
+  if(("Latitude" %in% names(df)) && ("Longitude" %in% names(df))){
+
   max_lat <- max(df["Latitude"], na.rm = TRUE)
   min_lat <- min(df["Latitude"], na.rm = TRUE)
 
@@ -38,4 +40,9 @@ occ_map <- function(df, color = "darkred") {
     ggplot2::coord_sf(xlim = c(min_long - 10, max_long + 10),
              ylim = c(min_lat - 10, max_lat + 10),
              expand = FALSE))
+  }
+  else{
+
+    stop("Error: Missing columns 'Latitude' and/or 'Longitude'")
+  }
 }
