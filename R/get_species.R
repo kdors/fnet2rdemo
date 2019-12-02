@@ -15,6 +15,11 @@
 #' @examples
 #'
 get_species <- function(df, genus) {
+
+  if(!is.data.frame(df)) {
+    stop("Error: Function input is not a dataframe")
+  }
+
   len <- length(df[,"ScientificName"])
   s <- vector(mode="character",length=len)
   d <- df[,"ScientificName"]
