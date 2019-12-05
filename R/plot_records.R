@@ -13,7 +13,7 @@
 #'
 
 plot_records <- function(df, color = TRUE) {
-  if color == TRUE{
+  if (color == TRUE){
     res <- plot(df$ScientificName, xlab = "Scientific Name", ylab = "Number of records", main = "Records by Scientific Name", col = rainbow(nlevels(df$ScientificName)))  
   } else {
     res <- plot(df$ScientificName, xlab = "Scientific Name", ylab = "Number of records", main = "Records by Scientific Name")
