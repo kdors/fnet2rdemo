@@ -11,7 +11,6 @@
 
 #'
 
-#input <- read.csv("~/Desktop/FIshNet2_Modifications/searchres.csv")
 
 fishsummary <- function(input, verbose = TRUE) {
   # recs <- number of records in the data frame
