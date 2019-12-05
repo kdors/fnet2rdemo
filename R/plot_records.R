@@ -11,8 +11,7 @@
 #' @param color True if each bar should have a distinct color, FALSE for grey bars. Default: TRUE
 #' @return Plot of record count by Scientific Name on a bar graph
 #'
-#' @examples
-#' occ_map(ictaluridae)
+
 plot_records <- function(df, color = TRUE) {
   if color == TRUE{
     res <- plot(df$ScientificName, xlab = "Scientific Name", ylab = "Number of records", main = "Records by Scientific Name", col = rainbow(nlevels(df$ScientificName)))  
