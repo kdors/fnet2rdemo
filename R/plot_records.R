@@ -11,8 +11,10 @@
 #' @param color True if each bar should have a distinct color, FALSE for grey bars. Default: TRUE
 #' @return Plot of record count by Scientific Name on a bar graph
 #'
+#' @examples
+#' plot_records(louisiana)
 
-plot_records <- function(df, color = TRUE) {
+plot_records <- function(df, top_ten = TRUE, color = TRUE) {
   if (color == TRUE){
     res <- plot(df$ScientificName, xlab = "Scientific Name", ylab = "Number of records", main = "Records by Scientific Name", col = rainbow(nlevels(df$ScientificName)))  
   } else {
