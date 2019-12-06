@@ -26,4 +26,5 @@ only one word, no species name is returned.
 \examples{
 get_species(ictaluridae, "Ameirus")
 get_species(ictaluridae, "Noturus")
+get_species(louisiana, "Scaphirhynchus")
 }

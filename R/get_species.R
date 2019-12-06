@@ -15,7 +15,7 @@
 #' @examples
 #' get_species(ictaluridae, "Ameirus")
 #' get_species(ictaluridae, "Noturus")
-#' get_species(louisiana)
+#' get_species(louisiana, "Scaphirhynchus")
 
 get_species <- function(df, genus) {
 

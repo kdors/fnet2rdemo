@@ -8,10 +8,10 @@
 #' @return Filtered dataset with records that do not have a blank tissue value
 #'
 #' # summarize occurrence records
-#' @example
-#' has_tissues(louisiana)
+#' @examples
+#' has_tissue(louisiana,TRUE)
 #'
-has_tissues <- function(input, verbose = TRUE){
+has_tissue <- function(input, verbose = TRUE){
   output <- input$Tissues[!is.na(input$Tissues)]
   total <- length(output)
   if(verbose == TRUE){

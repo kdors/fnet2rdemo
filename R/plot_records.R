@@ -10,6 +10,7 @@
 #' @importFrom grDevices rainbow
 #' @importFrom graphics plot
 #' @param df A dataframe in FishNet2 standard format (by using read.csv())
+#' @param top_ten Top ten species occurence counts
 #' @param color True if each bar should have a distinct color, FALSE for grey bars. Default: TRUE
 #' @return Plot of record count by Scientific Name on a bar graph
 #'

@@ -2,7 +2,7 @@
 
 export(fishsummary)
 export(get_species)
-export(hasTissues)
+export(has_tissue)
 export(occ_map)
 export(plot_records)
 export(spatial_search)
