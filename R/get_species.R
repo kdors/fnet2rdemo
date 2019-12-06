@@ -11,15 +11,11 @@
 #' @param df A dataframe in FishNet2 standard format (by using read.csv())
 #' @param genus Genus of species
 #' @return Vector of unique species values or character(0) if empty
-<<<<<<< HEAD
+
 #' @examples
 #' get_species(ictaluridae, "Ameirus")
 #' get_species(ictaluridae, "Noturus")
-=======
-#'
-#' @examples
 #' get_species(louisiana)
->>>>>>> 3cf98953208c54c10a0cf92988fea62364f30ac2
 
 get_species <- function(df, genus) {
 

@@ -8,7 +8,6 @@
 #' @return A list of summary statistics
 #'
 #' # summarize occurrence records
-
 #'
 
 
