@@ -18,6 +18,10 @@
 #' @examples
 #' spatial_search(ictaluridae, 36.12, -77.63, 1)
 #'
+#' \dontrun{
+#' spatial_search(ictaluridae, -173,44,10)
+#' }
+#'
 spatial_search <- function(df, lat, lon, r){
 
   if(!is.data.frame(df)) {

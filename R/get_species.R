@@ -12,7 +12,8 @@
 #' @param genus Genus of species
 #' @return Vector of unique species values or character(0) if empty
 #' @examples
-#' get_species(ictaluridae, Ameirus)
+#' get_species(ictaluridae, "Ameirus")
+#' get_species(ictaluridae, "Noturus")
 
 get_species <- function(df, genus) {
 

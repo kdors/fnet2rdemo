@@ -6,10 +6,12 @@
 #' @param input A dataframe in FishNet2 standard format (by using read.csv())
 #' @param verbose Print progress and information messages. Default: TRUE
 #' @return Filtered dataset with records that do not have a blank tissue value
-#' 
+#'
 #' # summarize occurrence records
-#' 
-hasTissues <- function(input, verbose = TRUE){
+#' @example
+#' has_tissues(louisiana)
+#'
+has_tissues <- function(input, verbose = TRUE){
   output <- input$Tissues[!is.na(input$Tissues)]
   total <- length(output)
   if(verbose == TRUE){
@@ -18,5 +20,5 @@ hasTissues <- function(input, verbose = TRUE){
   }
   return(output)
 }
-  
+
 
