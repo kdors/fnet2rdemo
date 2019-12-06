@@ -1,10 +1,10 @@
 #' Plot Longitude and Latitude Points on World Map
 #'
-#' \code{occ_map} returns a plot with columns 'Longtitude' and 'Latitude' in FishNet2
+#' \code{occ_map} returns a plot with columns 'Longitude' and 'Latitude' in FishNet2
 #' dataframe on a world map.
 #'
 #' This is a function to get a plot of occurrence records from FishNet2 search query.
-#' A dataframe is inputed and must have the columns 'Longitude' and 'Latitude'.
+#' Parameter is a dataframe that must have the columns 'Longitude' and 'Latitude'.
 #' NA values are removed in the function.
 #'
 #' @export

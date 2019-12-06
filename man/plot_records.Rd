@@ -9,7 +9,7 @@ plot_records(df, top_ten = TRUE, color = TRUE)
 \arguments{
 \item{df}{A dataframe in FishNet2 standard format (by using read.csv())}
 
-\item{top_ten}{Top ten species occurence counts}
+\item{top_ten}{Top ten species occurrence counts}
 
 \item{color}{True if each bar should have a distinct color, FALSE for grey bars. Default: TRUE}
 }
@@ -17,7 +17,7 @@ plot_records(df, top_ten = TRUE, color = TRUE)
 Plot of record count by Scientific Name on a bar graph
 }
 \description{
-\code{plot_records} returns a bar graph showing the numer of records for each distinct
+\code{plot_records} returns a bar graph showing the number of records for each distinct
 scientific name in the dataset.
 }
 \details{

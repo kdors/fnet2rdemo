@@ -1,7 +1,7 @@
 #' Filter data by longitude and latitude.
 #'
-#' \code{spatialsearch} returns the data that falls within radius given raidius,
-#' and latitude and longtitude coordinates.
+#' \code{spatialsearch} returns the data that falls within radius given radius,
+#' and latitude and longitude coordinates.
 #'
 #' This is  a function to filter data given in the format of a csv file from
 #' FishNet2. For this to work properly, the dataframe must have column names

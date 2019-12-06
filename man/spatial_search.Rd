@@ -20,8 +20,8 @@ Rows in file that fall within circle with center (lat,long) and
   radius r
 }
 \description{
-\code{spatialsearch} returns the data that falls within radius given raidius,
-and latitude and longtitude coordinates.
+\code{spatialsearch} returns the data that falls within radius given radius,
+and latitude and longitude coordinates.
 }
 \details{
 This is  a function to filter data given in the format of a csv file from

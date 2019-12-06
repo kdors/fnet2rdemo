@@ -5,7 +5,7 @@
 \alias{louisiana}
 \title{Dataset of Records from Louisiana from Years 2005 to 2006}
 \format{A data frame with 273 rows and 20 variables: \describe{
-  \item{InstitutionCode}{unqiue code given to institution who owns the data}
+  \item{InstitutionCode}{unique code given to institution who owns the data}
   \item{CollectionCode}{Collection Code}
   \item{IndividualCount}{Number of fish individuals}
   \item{ScientificName}{Scientific name of fish observation}
@@ -15,7 +15,7 @@
   \item{Latitude}{Latitude observed}
   \item{Longitude}{Longitude observed}
   \item{HorizontalDatum}{Horizontal Datum}
-  \item{Country}{Contry that lot was observed in}
+  \item{Country}{Country that lot was observed in}
   \item{StateProvince}{State or province where lot was observed}
   \item{County}{County that lot was observed in}
   \item{YearCollected}{Year collected}
