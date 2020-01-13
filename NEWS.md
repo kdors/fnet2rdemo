@@ -1,4 +1,5 @@
-# rfishnet2 (Development Version)
+# rfishnet2 (De
+velopment Version)
 
 * Add News document to document our progress!
 * Add occ_map function to plot points on the world map
