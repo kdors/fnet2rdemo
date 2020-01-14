@@ -1,6 +1,8 @@
 # rfishnet2
 
 [![Build Status](https://travis-ci.com/kdors/rfishnet2.svg?branch=master)](https://travis-ci.com/kdors/rfishnet2)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/rfishnet2)](https://CRAN.R-project.org/package=rfishnet2)
 
 R package for FishNet2
 
