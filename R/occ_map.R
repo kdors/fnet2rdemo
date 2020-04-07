@@ -36,7 +36,7 @@ occ_map <- function(df, color = "darkred") {
   return(ggplot2::ggplot(data = world_map) +
     ggplot2::geom_sf() +
     ggplot2::geom_point(data = df, ggplot2::aes(x = Longitude, y = Latitude), size = 2,
-               shape = 23, fill = color) +
+               shape = 23, fill=color) +
     ggplot2::coord_sf(xlim = c(min_long - 10, max_long + 10),
              ylim = c(min_lat - 10, max_lat + 10),
              expand = FALSE))
