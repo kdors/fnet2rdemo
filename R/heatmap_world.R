@@ -3,11 +3,13 @@
 #' Creates a heatmap of the frequency of an occurrence by country/region.
 #'
 #' @export
+#' @importFrom graphics par
 #' @param df A dataframe in FishNet2 standard format with column labeled 'Country'
+#' @param name Value in 'ScientificName' or 'Family' column
 #' @return heatmap showing frecuency by country
 #'
 #' @examples
-#' hearmap_world(ictaluridae)
+#' heatmap_world(ictaluridae)
 #'
 heatmap_world <- function(df, name="none"){
   # check for 'Country' column existence
@@ -15,6 +17,9 @@ heatmap_world <- function(df, name="none"){
     stop("'Country' column does not exist.")
   }
   # check that level is either species, genus, or family
+  if("ScientificName" %in% colnames(df) == FALSE | "Family" %in% colnames(df) == FALSE ) {
+    stop("'ScientificName' or 'Family' column does not exist.")
+  }
   if (name != "none"){
     df <- subset(df, ScientificName == name | Family == name)
   }
@@ -25,11 +30,11 @@ heatmap_world <- function(df, name="none"){
   }
   # map country names
   info <- df %>% count(Country)
-  info <- rename(info, Countries = n)
-  map_info <- joinCountryData2Map(dF=info, joinCode = "NAME", nameJoinColumn = 'Country', verbose=TRUE)
+  info <- dplyr::rename(info, Countries = n)
+  map_info <- rworldmap::joinCountryData2Map(dF=info, joinCode = "NAME", nameJoinColumn = 'Country', verbose=TRUE)
 
   # plot map
   par(mai=c(0,0,0.2,0), xaxs="i",yaxs="i")
-  mapCountryData(map_info, nameColumnToPlot = "Countries",catMethod="categorical")
+  rworldmap::mapCountryData(map_info, nameColumnToPlot = "Countries",catMethod="categorical")
 
 }

@@ -10,6 +10,7 @@
 #' 'Family', 'Country','State/Province','County').
 #'
 #' @export
+#' @importFrom utils head
 #' @param df A dataframe in FishNet2 standard format (by using read.csv())
 #' @param n The number of the labels with the highest frequencies to be included
 #'   in the graph
@@ -17,7 +18,7 @@
 #' @return A bar graph
 #'
 #' @examples
-#' top_n_plots(countries_search,10,"ScientificName")
+#' top_n_plots(ictaluridae,10,"ScientificName")
 
 top_n_plots <- function(df,n,colName){
   #check if column exists
@@ -29,7 +30,7 @@ top_n_plots <- function(df,n,colName){
 
   df <- df[df[,colName] %in% names(sntable),]
   df <- within(df, colName <- factor(colName,levels=names(sort(table(colName),decreasing=TRUE))))
-  ggplot(data = df) + geom_bar(mapping = aes_string(x = colName, fill = colName)) + theme(axis.text.x=element_text(angle=90,hjust=1,vjust=0.5))
+  ggplot2::ggplot(data = df) + ggplot2::geom_bar(mapping = ggplot2::aes_string(x = colName, fill = colName)) + ggplot2::theme(axis.text.x= ggplot2::element_text(angle=90,hjust=1,vjust=0.5))
 
 }
 
