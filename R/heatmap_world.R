@@ -9,15 +9,20 @@
 #' @examples
 #' hearmap_world(ictaluridae)
 #'
-heatmap_world <- function(df){
+heatmap_world <- function(df, name="none"){
   # check for 'Country' column existence
-
+  if ("Country" %in% colnames(df) == FALSE) {
+    stop("'Country' column does not exist.")
+  }
   # check that level is either species, genus, or family
-
-  # check whether name corresponds to level
+  if (name != "none"){
+    df <- subset(df, ScientificName == name | Family == name)
+  }
 
   # select rows with name only and check if empty
-
+  if (nrow(df)==0) {
+    stop("Name given does not exist in 'ScientificName' or 'Family' columns")
+  }
   # map country names
   info <- df %>% count(Country)
   info <- rename(info, Countries = n)
