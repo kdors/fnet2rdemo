@@ -11,14 +11,19 @@
 #' @param df A dataframe in FishNet2 standard format (by using read.csv())
 #' @param genus Genus of species
 #' @return Vector of unique species values or character(0) if empty
-#'
+
 #' @examples
-#' get_species(louisiana)
+#' get_species(ictaluridae, "Ameirus")
+#' get_species(ictaluridae, "Noturus")
+#' get_species(louisiana, "Scaphirhynchus")
 
 get_species <- function(df, genus) {
 
   if(!is.data.frame(df)) {
     stop("Error: Function input is not a dataframe")
+  }
+  if(!("ScientificName" %in% names(df))){
+    stop("Error: Column 'ScientificName' not found.")
   }
 
   len <- length(df[,"ScientificName"])

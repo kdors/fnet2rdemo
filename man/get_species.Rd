@@ -23,3 +23,8 @@ This is a function to get the species name of a given genus name. Names are
 found using the 'ScientificName' column in a FishNet2 dataframe. If "value is
 only one word, no species name is returned.
 }
+\examples{
+get_species(ictaluridae, "Ameirus")
+get_species(ictaluridae, "Noturus")
+get_species(louisiana, "Scaphirhynchus")
+}

@@ -1,10 +1,10 @@
 #' Plot Longitude and Latitude Points on World Map
 #'
-#' \code{occ_map} returns a plot with columns 'Longtitude' and 'Latitude' in FishNet2
+#' \code{occ_map} returns a plot with columns 'Longitude' and 'Latitude' in FishNet2
 #' dataframe on a world map.
 #'
 #' This is a function to get a plot of occurrence records from FishNet2 search query.
-#' A dataframe is inputed and must have the columns 'Longitude' and 'Latitude'.
+#' Parameter is a dataframe that must have the columns 'Longitude' and 'Latitude'.
 #' NA values are removed in the function.
 #'
 #' @export
@@ -25,6 +25,8 @@ occ_map <- function(df, color = "darkred") {
     stop("Error: Color not found")
   }
 
+  if(("Latitude" %in% names(df)) && ("Longitude" %in% names(df))){
+
   max_lat <- max(df["Latitude"], na.rm = TRUE)
   min_lat <- min(df["Latitude"], na.rm = TRUE)
 
@@ -34,8 +36,13 @@ occ_map <- function(df, color = "darkred") {
   return(ggplot2::ggplot(data = world_map) +
     ggplot2::geom_sf() +
     ggplot2::geom_point(data = df, ggplot2::aes(x = Longitude, y = Latitude), size = 2,
-               shape = 23, fill = color) +
+               shape = 23, fill=color) +
     ggplot2::coord_sf(xlim = c(min_long - 10, max_long + 10),
              ylim = c(min_lat - 10, max_lat + 10),
              expand = FALSE))
+  }
+  else{
+
+    stop("Error: Missing columns 'Latitude' and/or 'Longitude'")
+  }
 }

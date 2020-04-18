@@ -20,8 +20,8 @@ Rows in file that fall within circle with center (lat,long) and
   radius r
 }
 \description{
-\code{spatialsearch} returns the data that falls within radius given raidius,
-and latitude and longtitude coordinates.
+\code{spatialsearch} returns the data that falls within radius given radius,
+and latitude and longitude coordinates.
 }
 \details{
 This is  a function to filter data given in the format of a csv file from
@@ -30,5 +30,9 @@ using names given in standard csv format from FishNet2 website.
 }
 \examples{
 spatial_search(ictaluridae, 36.12, -77.63, 1)
+
+\dontrun{
+spatial_search(ictaluridae, -173,44,10)
+}
 
 }
