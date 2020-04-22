@@ -5,7 +5,7 @@
 \title{Outputs a bar graph giving the top n in frequency in specified column of
 dataframe}
 \usage{
-top_n_plots(df, n, colName)
+top_n_plots(df, n, colName, color = "default colors")
 }
 \arguments{
 \item{df}{A dataframe in FishNet2 standard format (by using read.csv())}
@@ -14,6 +14,8 @@ top_n_plots(df, n, colName)
 in the graph}
 
 \item{colName}{The column name that the graph outputs}
+
+\item{color}{Color of the bars, by default is a different color for each bar}
 }
 \value{
 A bar graph
