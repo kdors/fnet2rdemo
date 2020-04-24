@@ -1,7 +1,7 @@
 Package: rfishnet2
 Type: Package
 Title: Exploratory Data Analysis for FishNet2 Data
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(person(
   "Margaux Armfield", "email = margaux.armfield@gmail.com", role = "aut"),
   person("Kennedy Dorsey", email =  "kadorsey97@gmail.com", role = c("aut", "cre")))
