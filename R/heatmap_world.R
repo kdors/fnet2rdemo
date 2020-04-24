@@ -4,6 +4,7 @@
 #'
 #' @export
 #' @importFrom graphics par
+#' @importFrom dplyr %>%
 #' @param df A dataframe in FishNet2 standard format with column labeled 'Country'
 #' @param name Value in 'ScientificName' or 'Family' column
 #' @return heatmap showing frecuency by country
