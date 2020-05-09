@@ -12,7 +12,7 @@ heatmap_world(df, name = "none")
 \item{name}{Value in 'ScientificName' or 'Family' column}
 }
 \value{
-heatmap showing frecuency by country
+heatmap showing frequency by country
 }
 \description{
 Creates a heatmap of the frequency of an occurrence by country/region.

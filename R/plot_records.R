@@ -4,7 +4,7 @@
 #' scientific name in the dataset.
 #'
 #' This is a function to visualize data by Scientific Name from FishNet2 search query.
-#' A dataframe is inputed from a standard FishNet2 search query.
+#' A dataframe is input from a standard FishNet2 search query.
 #'
 #' @export
 #' @importFrom grDevices rainbow

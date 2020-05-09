@@ -10,4 +10,3 @@
 ## Documentation
 
 * Added method documentation for functions
-

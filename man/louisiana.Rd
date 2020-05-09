@@ -4,7 +4,8 @@
 \name{louisiana}
 \alias{louisiana}
 \title{Dataset of Records from Louisiana from Years 2005 to 2006}
-\format{A data frame with 273 rows and 20 variables: \describe{
+\format{
+A data frame with 273 rows and 20 variables: \describe{
   \item{InstitutionCode}{unique code given to institution who owns the data}
   \item{CollectionCode}{Collection Code}
   \item{IndividualCount}{Number of fish individuals}
@@ -26,7 +27,8 @@
   \item{BasisOfRecord}{Preserved Specimen}
   \item{DateLastModified}{Data record last modified in database}
 
-}}
+}
+}
 \source{
 \url{http://www.fishnet2.net/search.aspx?l=+Louisiana&d=2005-2006}
 }

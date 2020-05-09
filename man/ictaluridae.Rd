@@ -4,7 +4,8 @@
 \name{ictaluridae}
 \alias{ictaluridae}
 \title{Dataset of Ictaluridae Taxon from Years 2017 to 2019}
-\format{A data frame with 273 rows and 16 variables: \describe{
+\format{
+A data frame with 273 rows and 16 variables: \describe{
   \item{InstitutionCode}{unique code given to institution who owns the data}
   \item{IndividualCount}{Number of fish individuals}
   \item{ScientificName}{Scientific name of fish observation}
@@ -22,7 +23,8 @@
   \item{BasisOfRecord}{Preserved Specimen}
   \item{DateLastModified}{Data record last modified in database}
 
-}}
+}
+}
 \source{
 \url{http://www.fishnet2.net/search.aspx?t=ictaluridae&d=2017-2019}
 }
