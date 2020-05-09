@@ -125,7 +125,7 @@ fishsummary <- function(input, verbose = TRUE) {
   if (is.null(input$PreparationType)){
     preparation_type <- "None"
   } else {
-    preparation_type <- (input$PreparationType)
+    preparation_type <- table(input$PreparationType)
   }
 
   # return summary
